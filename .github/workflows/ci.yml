@@ -28,6 +28,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key root@83.222.9.213 << 'EOF'
             cd /root/sklad-api
             git pull
-            docker build -t myapp .
-            docker run -d -p 7778:7777 myapp
+            docker compose up --build -d
           EOF
