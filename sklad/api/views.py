@@ -8,19 +8,21 @@ from .models import Inventory
 
 @api_view(['GET'])
 def generate_user_report_xlsx(request):
+    id = int(request.GET.get('id'))
     inventories = Inventory.objects.all()
     data = []
-    for inventory in inventories:
-        data.append({
-            'Номер': inventory.id,
-            'Сотрудник проводивший инвентаризацию': inventory.employee.fio,
-            'Категория объектов': inventory.category.name,
-            'Дата': inventory.date.strftime('%Y-%m-%d'),
-            'Учетное количество': inventory.count,
-            'Фактическое количество': inventory.count_fact,
-            'Состояние': inventory.status.name,
-            'Примечание': inventory.description
-        })
+    #for inventory in inventories:
+    inventory = inventories.get(id=id)
+    data.append({
+        'Номер': inventory.id,
+        'Сотрудник проводивший инвентаризацию': inventory.employee.fio,
+        'Категория объектов': inventory.category.name,
+        'Дата': inventory.date.strftime('%Y-%m-%d'),
+        'Учетное количество': inventory.count,
+        'Фактическое количество': inventory.count_fact,
+        'Состояние': inventory.status.name,
+        'Примечание': inventory.description
+    })
     df = pd.DataFrame(data)
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
