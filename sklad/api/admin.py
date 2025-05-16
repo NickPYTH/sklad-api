@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Supplier, Employee, Supply, Material, Inventory, Remain, Response
 
-admin.site.site_header = "Даркстор схема"
+admin.site.site_header = "СКЛАД"
 
 
 @admin.register(Supplier)

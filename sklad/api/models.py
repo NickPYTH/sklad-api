@@ -65,9 +65,17 @@ class Remain(models.Model):
     name = models.IntegerField(verbose_name="Мин. кол-во")
     material = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name="Материал")
 
+    class Meta:
+        verbose_name = 'Остаток'
+        verbose_name_plural = 'Остатки'
+
 class Response(models.Model):
     material = models.ManyToManyField(Material, verbose_name="Материалы")
     getter = models.IntegerField(verbose_name="Получатель")
     date = models.DateTimeField(verbose_name="Дата выдачи", default=None)
     count = models.IntegerField()
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name="Сотрудник")
+
+    class Meta:
+        verbose_name = 'Выдача'
+        verbose_name_plural = 'Выдачи'
