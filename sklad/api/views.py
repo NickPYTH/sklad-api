@@ -16,12 +16,7 @@ def generate_user_report_xlsx(request):
     data.append({
         'Номер': inventory.id,
         'Сотрудник проводивший инвентаризацию': inventory.employee.fio,
-        'Категория объектов': inventory.category.name,
-        'Дата': inventory.date.strftime('%Y-%m-%d'),
         'Учетное количество': inventory.count,
-        'Фактическое количество': inventory.count_fact,
-        'Состояние': inventory.status.name,
-        'Примечание': inventory.description
     })
     df = pd.DataFrame(data)
     output = io.BytesIO()
